@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.pinSubmit {
+    text-align: center;
+}
+
+body {
+    background-image: url(/static/pictures/indexBackground.jpg);
+    background-size: 1500px 750px;
+}
