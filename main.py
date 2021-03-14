@@ -18,10 +18,16 @@ test = db.child("Demo").get()
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
     #return str(test.val()) This is comnand to retrieve Firebase value.
+    # if request.method == "POST":
+    #     pinID =
     return render_template("index.html")
+
+@app.route('/lobby', methods=["GET", "POST"])
+def lobby():
+    return render_template("lobby.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

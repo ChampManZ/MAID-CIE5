@@ -14,3 +14,7 @@ body {
     background-image: url(/static/pictures/indexBackground.jpg);
     background-size: 1500px 750px;
 }
+
+.createRoomClass {
+    text-align: center;
+}
