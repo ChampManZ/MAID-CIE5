@@ -7,12 +7,21 @@
     <title>MAID - Lobby</title>
 </head>
 <body>
-    <h1>Game Lobby: เลขPINรอเขียนBACKEND</h1>
+    <h1>Please select your characters</h1>
     <div class="container">
-        <div class="segment">Player 1</div>
-        <div class="segment">Player 2</div>
-        <div class="segment">Player 3</div>
-        <div class="segment">Player 4</div>
+        <div class="segment" id="player1">Red
+            <button id="join1" onclick="return joinPlayer1()">Join</button>
+        </div>
+        <div class="segment" id="player2">Green
+            <button id="join2" onclick="return joinPlayer2()">Join</button>
+        </div>
+        <div class="segment" id="player3">Blue
+            <button id="join3" onclick="return joinPlayer3()">Join</button>
+        </div>
+        <div class="segment" id="player4">Baby Blue
+            <button id="join4" onclick="return joinPlayer4()">Join</button>
+        </div>
     </div>
+    <script src="/static/Javascript/lobby.js?v=1.0.0"></script>
 </body>
 </html>

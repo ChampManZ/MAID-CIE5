@@ -10,17 +10,19 @@
 <body>
     <div id="message">
         <h1>Welcome to MAID</h1>
-        <h3>Please enter your PIN</h3>
+        <!-- <h3>Please enter your PIN</h3> -->
 
-        <form name="pinForm" class="pinSubmit" method="POST">
+        <!-- <form name="pinForm" class="pinSubmit" method="POST">
             <label for="pin">PIN</label><br>
             <input type="password" id="pinText" name="pinInput" onkeypress="return inputChange()"><br> <br>
             <input id="enter" type="button" value="Enter!" onclick="return toLobby()">
         </form> <br>
         <div class="createRoomClass">
             <button id="createRoom" onclick="randomPin()">Create Room</button>
+        </div> -->
+        <div class="joinButton">
+            <button id="join" onclick="return joinLobby()" class="joinButton1">Join</button>
         </div>
-        <button id="tester" onclick="return test()">Test</button>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="/__/firebase/8.3.0/firebase-app.js"></script>
 

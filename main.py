@@ -29,5 +29,21 @@ def index():
 def lobby():
     return render_template("lobby.html")
 
+@app.route('/redPlayer', methods=["GET", "POST"])
+def redPlayer():
+    return render_template("redPlayer.html")
+
+@app.route('/greenPlayer', methods=["GET", "POST"])
+def greenPlayer():
+    return render_template("greenPlayer.html")
+
+@app.route('/bluePlayer', methods=["GET", "POST"])
+def bluePlayer():
+    return render_template("bluePlayer.html")
+
+@app.route('/babyBluePlayer', methods=["GET", "POST"])
+def babyBluePlayer():
+    return render_template("babyBluePlayer.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

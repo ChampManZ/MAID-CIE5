@@ -18,3 +18,12 @@ body {
 .createRoomClass {
     text-align: center;
 }
+
+.joinButton {
+    text-align: center;
+}
+
+.joinButton1 {
+    position: absolute;
+    top: 10%;
+}
