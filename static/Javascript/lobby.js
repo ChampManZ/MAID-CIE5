@@ -6,7 +6,7 @@ var joinButton4 = document.getElementById("join4");
 function joinPlayer1() {
     joinButton1.addEventListener("click", function() {
         window.location.href = "redPlayer";
-    })
+    }) 
 }
 
 function joinPlayer2() {
