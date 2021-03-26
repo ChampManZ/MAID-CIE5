@@ -45,10 +45,11 @@ def bluePlayer():
 def babyBluePlayer():
     return render_template("babyBluePlayer.html")
 
-@app.route('/test')
+@app.route('/test', methods=["GET", "POST"])
 def tester():
-    if testValue.val() == "3":
-        return "Mr.Ashan love you!"
+    if request.method == "GET":
+        stringTest = "Mr.Ashan love everyone"
+        return render_template('test.html', AshanTest=stringTest)
 
 if __name__ == "__main__":
     app.run(debug=True)
