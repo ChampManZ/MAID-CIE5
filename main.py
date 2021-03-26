@@ -14,7 +14,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
-test = db.child("Demo").get()
+testValue = db.child("DiceRoll").get()
 
 app = Flask(__name__)
 
@@ -44,6 +44,11 @@ def bluePlayer():
 @app.route('/babyBluePlayer', methods=["GET", "POST"])
 def babyBluePlayer():
     return render_template("babyBluePlayer.html")
+
+@app.route('/test')
+def tester():
+    if testValue.val() == "3":
+        return "Mr.Ashan love you!"
 
 if __name__ == "__main__":
     app.run(debug=True)
