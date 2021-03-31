@@ -8,12 +8,9 @@
 </head>
 <body>
     <h1>You Are Blue!</h1>
-    <div class="readyDiv">
-        <button id="readyButton" onclick="return playerReady()" class="readyButton">Ready</button>
-    </div>
-    <div class="container" id="containerID">
-        <h3>Money</h3>
-    </div>
+    <form action="{{url_for("bluePlayer")}}" method="GET">
+        <p class="infoFont" id="initialMoney">Money: ${{initialMoney}}</p>
+    </form>
     <script src="/static/Javascript/playerReady.js?v=1.0.0"></script>
 </body>
 </html>

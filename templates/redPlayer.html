@@ -6,14 +6,11 @@
     <link rel="stylesheet" href="/static/stylesheets/redPlayer.css">
     <title>MAID - Red</title>
 </head>
-<body>
+<body onload="Javascript:autoRefresh(5000);">
     <h1>You Are Red!</h1>
-    <div class="readyDiv">
-        <button id="readyButton" onclick="return playerReady()" class="readyButton">Ready</button>
-    </div>
-    <div class="container" id="containerID">
-        <h3>Money</h3>
-    </div>
-    <script src="/static/Javascript/playerReady.js?v=1.0.0"></script>
+    <form action="{{url_for("redPlayer")}}" method="GET">
+        <p class="infoFont" id="initialMoney">Money: ${{initialMoney}}</p>
+    </form>
+    <script src="/static/Javascript/autorefresh.js?v=1.0.0" async></script>
 </body>
 </html>

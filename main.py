@@ -31,25 +31,48 @@ def lobby():
 
 @app.route('/redPlayer', methods=["GET", "POST"])
 def redPlayer():
-    return render_template("redPlayer.html")
+    ledTestValue = db.child("TestLED").get()
+    ledStatus = ledTestValue.val()
+    if request.method == "GET":
+        initialMoney = 1000000
+        if ledStatus == "OFF":
+            initialMoney -= 1000
+            print("LED OFF")
+            ledStatus = db.child("TestLED").get().val()
+            print(ledStatus)
+            return render_template("redPlayer.html", initialMoney=initialMoney)
+        elif ledStatus == "ON":
+            initialMoney += 1000
+            print("LED ON")
+            ledStatus = db.child("TestLED").get().val()
+            print()
+            return render_template("redPlayer.html", initialMoney=initialMoney)
+    return render_template("redPlayer.html", initialMoney=initialMoney)
 
 @app.route('/greenPlayer', methods=["GET", "POST"])
 def greenPlayer():
-    return render_template("greenPlayer.html")
+    if request.method == "GET":
+        initialMoney = 1000000
+        return render_template("greenPlayer.html", initialMoney=initialMoney)
 
 @app.route('/bluePlayer', methods=["GET", "POST"])
 def bluePlayer():
-    return render_template("bluePlayer.html")
+    if request.method == "GET":
+        initialMoney = 1000000
+        return render_template("bluePlayer.html", initialMoney=initialMoney)
 
 @app.route('/babyBluePlayer', methods=["GET", "POST"])
 def babyBluePlayer():
-    return render_template("babyBluePlayer.html")
+    if request.method == "GET":
+        initialMoney = 1000000
+        return render_template("babyBluePlayer.html", initialMoney=initialMoney)
 
 @app.route('/test', methods=["GET", "POST"])
 def tester():
     if request.method == "GET":
-        stringTest = "Mr.Ashan love everyone"
-        return render_template('test.html', AshanTest=stringTest)
+        if testValue.val() == "3":
+            stringTest = "Mr.Ashan really love you"
+            return render_template('test.html', AshanTest=stringTest)
 
 if __name__ == "__main__":
     app.run(debug=True)
