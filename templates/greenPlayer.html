@@ -6,11 +6,16 @@
     <link rel="stylesheet" href="/static/stylesheets/greenPlayer.css">
     <title>MAID - Green</title>
 </head>
-<body>
+<body onload="Javascript:autoRefresh(5000);">
     <h1>You Are Green!</h1>
     <form action="{{url_for("greenPlayer")}}" method="GET">
         <p class="infoFont" id="initialMoney">Money: ${{initialMoney}}</p>
     </form>
-    <script src="/static/Javascript/playerReady.js?v=1.0.0"></script>
+    <form action="{{url_for("greenPlayer")}}" method="GET">
+        <div class="message-wrap">
+            <p class="diceFont" id="diceValue">You Roll {{diceValue}}!</p>
+        </div>
+    </form>
+    <script src="/static/Javascript/autorefresh.js"></script>
 </body>
 </html>

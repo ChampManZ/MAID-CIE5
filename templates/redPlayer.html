@@ -11,6 +11,11 @@
     <form action="{{url_for("redPlayer")}}" method="GET">
         <p class="infoFont" id="initialMoney">Money: ${{initialMoney}}</p>
     </form>
+    <form action="{{url_for("redPlayer")}}" method="GET">
+        <div class="message-wrap">
+            <p class="diceFont" id="diceValue">You Roll {{diceValue}}!</p>
+        </div>
+    </form>
     <script src="/static/Javascript/autorefresh.js?v=1.0.0" async></script>
 </body>
 </html>

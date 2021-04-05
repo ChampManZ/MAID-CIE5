@@ -31,3 +31,15 @@ h3 {
 .infoFont {
     color: white;
 }
+
+.message-wrap {
+    background: #b6d1fc;
+    border: 1px solid #00b3e3;
+    padding: 10px;
+    margin: 5px;
+}
+
+.diceFont {
+    color: black;
+    text-align: center;
+}
