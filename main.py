@@ -43,7 +43,7 @@ def redPlayer():
         
         if ledStatus == "OFF":
             initialMoney -= 1000
-            print("LED OFF")
+            print("LED OFF") #For debug
             ledStatus = db.child("TestLED").get().val()
             print(ledStatus)
             return render_template("redPlayer.html", initialMoney=initialMoney, diceValue=diceValue)
