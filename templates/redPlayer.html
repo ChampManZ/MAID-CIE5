@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/stylesheets/redPlayer.css">
     <title>MAID - Red</title>
 </head>
-<body onload="Javascript:autoRefresh(5000);">
+<body">
     <h1>You Are Red!</h1>
     <p id="forHidden" class="forHidden">P0</p>
     <form action="{{url_for("redPlayer")}}" method="GET">
@@ -20,7 +20,7 @@
     <div id="commandzone">
 
     </div>
-    <script src="/static/Javascript/autorefresh.js?v=1.0.0"></script>
     <script src="/static/Javascript/buysell.js?v=1.0.0"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase.js"></script>
 </body>
 </html>

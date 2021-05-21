@@ -1,3 +1,5 @@
+const firebase = require('firebase')
+
 var testValue = 1
 var checkPlayer = document.getElementById("forHidden").textContent
 
@@ -24,4 +26,4 @@ var checkPlayer = document.getElementById("forHidden").textContent
         // document.body.appendChild(btnNope)
     }
 
-console.log(checkPlayer)
+console.log(typeof(checkPlayer))
