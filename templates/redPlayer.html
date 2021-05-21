@@ -8,15 +8,19 @@
 </head>
 <body onload="Javascript:autoRefresh(5000);">
     <h1>You Are Red!</h1>
+    <p id="forHidden" class="forHidden">P0</p>
     <form action="{{url_for("redPlayer")}}" method="GET">
-        <p class="infoFont" id="initialMoney">Money: ${{initialMoney}}</p>
+        <p class="infoFont" id="moneyVal">Money: ${{moneyVal}}</p>
     </form>
     <form action="{{url_for("redPlayer")}}" method="GET">
         <div class="message-wrap">
             <p class="diceFont" id="diceValue">You Roll {{DiceRollVar}}!</p>
         </div>
     </form>
-    <script src="/static/Javascript/autorefresh.js?v=1.0.0" async></script>
+    <div id="commandzone">
+
+    </div>
+    <script src="/static/Javascript/autorefresh.js?v=1.0.0"></script>
     <script src="/static/Javascript/buysell.js?v=1.0.0"></script>
 </body>
 </html>

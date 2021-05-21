@@ -31,53 +31,51 @@ def lobby():
 
 @app.route('/redPlayer', methods=["GET", "POST"])
 def redPlayer():
-    ledTestValue = db.child("TestLED").get()
-    ledStatus = ledTestValue.val()
     DiceRollStatus = db.child("DiceRoll").get()
     DiceRollVar = DiceRollStatus.val()
+
+    money = db.child("Players/P0/Money").get()
+    moneyVal = money.val()
     if request.method == "GET":
         if DiceRollVar == 0:
-            initialMoney = 1000000
-            if ledStatus == "OFF":
-                initialMoney -= 1000
-                print("LED OFF")
-                ledStatus = db.child("TestLED").get().val()
-                print(ledStatus)
-                return render_template("redPlayer.html", initialMoney=initialMoney)
-            elif ledStatus == "ON":
-                initialMoney += 1000
-                print("LED ON")
-                ledStatus = db.child("TestLED").get().val()
-                print()
-                return render_template("redPlayer.html", initialMoney=initialMoney)
-    return render_template("redPlayer.html", initialMoney=initialMoney, DiceRollVar=DiceRollVar)
+            moneyVal -= 100
+    return render_template("redPlayer.html", DiceRollVar=DiceRollVar, moneyVal=moneyVal)
 
 @app.route('/greenPlayer', methods=["GET", "POST"])
 def greenPlayer():
     DiceRollStatus = db.child("DiceRoll").get()
     DiceRollVar = DiceRollStatus.val()
+
+    money = db.child("Players/P1/Money").get()
+    moneyVal = money.val()
     if request.method == "GET":
         if DiceRollVar == 0:
-            initialMoney = 1000000
-        return render_template("greenPlayer.html", initialMoney=initialMoney, DiceRollVar=DiceRollVar)
+            moneyVal += 500
+    return render_template("greenPlayer.html", moneyVal=moneyVal, DiceRollVar=DiceRollVar)
 
 @app.route('/bluePlayer', methods=["GET", "POST"])
 def bluePlayer():
     DiceRollStatus = db.child("DiceRoll").get()
     DiceRollVar = DiceRollStatus.val()
+
+    money = db.child("Players/P2/Money").get()
+    moneyVal = money.val()
     if request.method == "GET":
         if DiceRollVar == 0:
-            initialMoney = 1000000
-        return render_template("bluePlayer.html", initialMoney=initialMoney, DiceRollVar=DiceRollVar)
+            moneyVal += 100
+    return render_template("bluePlayer.html", moneyVal=moneyVal, DiceRollVar=DiceRollVar)
 
 @app.route('/babyBluePlayer', methods=["GET", "POST"])
 def babyBluePlayer():
     DiceRollStatus = db.child("DiceRoll").get()
     DiceRollVar = DiceRollStatus.val()
+
+    money = db.child("Players/P3/Money").get()
+    moneyVal = money.val()
     if request.method == "GET":
         if DiceRollVar == 0:
-            initialMoney = 1000000
-        return render_template("babyBluePlayer.html", initialMoney=initialMoney, DiceRollVar=DiceRollVar)
+            moneyVal += 1000
+    return render_template("babyBluePlayer.html", moneyVal=moneyVal, DiceRollVar=DiceRollVar)
 
 @app.route('/test', methods=["GET", "POST"])
 def tester():
