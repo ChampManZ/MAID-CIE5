@@ -56,6 +56,9 @@ const app = firebase.initializeApp({
     measurementId: "G-HW7K20PBTV"
 })
 
+const storage = app.storage();
+const ref = storage.ref('')
+
 function joinLobby() {
     var join = document.getElementById("join");
 

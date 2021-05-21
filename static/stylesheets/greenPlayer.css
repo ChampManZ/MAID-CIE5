@@ -43,3 +43,7 @@ h3 {
     color: black;
     text-align: center;
 }
+
+.forHidden {
+    display: none;
+}
