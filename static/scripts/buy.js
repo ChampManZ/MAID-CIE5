@@ -9,16 +9,24 @@ var checkPlayer = document.getElementById("forHidden").textContent
         btnBuy.innerHTML = "Buy"
         if (btnBuy.onclick = function() {
             //ไปดึงค่า Firebase มา +- เอา
-            firebase.database().ref("Players/" + String(checkPlayer)).update({
-                Money: 10000
+            var buySellRef = firebase.database().ref("TeeDinTest/RakaBuy")
+            buySellRef.once("value", function(buySnapshot) {
+                var buySellData = buySnapshot.val()
+                var playerMoneyBuyRef = firebase.database().ref("Players/" + String(checkPlayer) + "/Money")
+                playerMoneyBuyRef.once("value", function(playerSnapshot) {
+                    var playerData = playerSnapshot.val()
+                    var finalMoney = playerData - buySellData
+                    console.log("Player: ", playerData, "Buy: ", buySellData, "= ", playerData - buySellData)
+                    firebase.database().ref("Players/" + String(checkPlayer)).update({
+                        Money: finalMoney
+                    })
+                })
             })
         })
-        // let btnSell = document.createElement("button")
-        // btnSell.innerHTML = "Sell"
+
         // let btnNope = document.createElement("button")
         // btnNope.innerHTML = "Do Nothing"
 
         document.body.appendChild(btnBuy)
-        // document.body.appendChild(btnSell)
         // document.body.appendChild(btnNope)
     }
