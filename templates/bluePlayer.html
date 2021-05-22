@@ -14,10 +14,13 @@
         <p class="infoFont" id="moneyVal">Money: ${{moneyVal}}</p>
     </form>
     <form action="{{url_for("bluePlayer")}}" method="GET">
-        <div class="message-wrap">
+        <div class="message-wrap" id="messageWWW">
             <p class="diceFont" id="diceValue">You Roll {{DiceRollVar}}!</p>
         </div>
     </form>
+    <div class="winloseDiv">
+        <p id="winlose" class="winloseFont"></p>
+    </div>
     <div id="commandzone">
 
     </div>
@@ -48,5 +51,6 @@
         <script src="/static/scripts/buy.js?v=1.0.0"></script>
         <script src="/static/scripts/notbuy.js?v=1.0.0"></script>
         <script src="/static/scripts/diceFrontEnd.js?v=1.0.0"></script>
+        <script src="/static/scripts/winlose.js?v=1.0.0"></script>
 </body>
 </html>

@@ -47,3 +47,15 @@ h3 {
 .forHidden {
     display: none;
 }
+
+.winloseDiv {
+    background: #6366ff;
+    border: 1px solid #000ba3;
+    padding: 10px;
+    margin: 5px;
+}
+
+.winloseFont {
+    color: black;
+    text-align: center;
+}
