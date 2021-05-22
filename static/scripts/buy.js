@@ -1,32 +1,58 @@
 var testValue = 1 //ค่า LDR detect
 var checkPlayer = document.getElementById("forHidden").textContent
+var diceFont = document.getElementById("diceValue")
+var playerRefVar = document.getElementById("firebaseHidden").textContent
 
-    if (testValue == 1) {
-        //เดียว innerHTML ให้ไป fetch ข้อมูล block มาใส้
-        document.getElementById("commandzone").innerHTML += "<h3>You are now landed on เว้นไว้ก่อนค่อยดึง: "
+var playerStatusRef = firebase.database().ref("CurrentPlayer")
+playerStatusRef.on("value", function(snapshot) {
+    var playerStatus = snapshot.val()
 
-        let btnBuy = document.createElement("button")
-        btnBuy.innerHTML = "Buy"
-        if (btnBuy.onclick = function() {
-            //ไปดึงค่า Firebase มา +- เอา
-            var buySellRef = firebase.database().ref("TeeDinTest/RakaBuy")
-            buySellRef.once("value", function(buySnapshot) {
-                var buySellData = buySnapshot.val()
-                var playerMoneyBuyRef = firebase.database().ref("Players/" + String(checkPlayer) + "/Money")
-                playerMoneyBuyRef.once("value", function(playerSnapshot) {
-                    var playerData = playerSnapshot.val()
-                    var finalMoney = playerData - buySellData
-                    console.log("Player: ", playerData, "Buy: ", buySellData, "= ", playerData - buySellData)
-                    firebase.database().ref("Players/" + String(checkPlayer)).update({
-                        Money: finalMoney
-                    })
+    // if (playerStatus != checkPlayer) {
+    //     document.getElementById("commandzone").innerHTML += "<h3>Please wait"
+    // }
+    // console.log(testValue)
+    // console.log(playerStatus)
+    // console.log(checkPlayer)
+    
+    // console.log(typeof(testValue))
+    // console.log(typeof(playerStatus))
+    // console.log(typeof(checkPlayer))
+
+    var destinationRef = firebase.database().ref("Players/" + playerRefVar + "/Destination")
+    destinationRef.on("value", function(snapshot){
+        var destinationPlayer = snapshot.val()
+
+        if (Number(checkPlayer) != playerStatus) {
+            if (playerStatus == 1) {
+                diceFont.innerHTML = "Player Red is playing"
+            }
+            else if (playerStatus == 2) {
+                diceFont.innerHTML = "Player Green is playing"
+            } else if (playerStatus == 3) {
+                diceFont.innerHTML = "Player Blue is playing"
+            } else if (playerStatus == 4) {
+                diceFont.innerHTML = "Player Baby Blue is playing"
+            }
+        }
+    
+        if (testValue == 1 && Number(checkPlayer) == playerStatus) {
+            //เดียว innerHTML ให้ไป fetch ข้อมูล block มาใส้
+            document.getElementById("commandzone").innerHTML += "<h3>You are now landed on " + destinationPlayer + ": "
+    
+            let btnBuy = document.createElement("button")
+            btnBuy.innerHTML = "Buy"
+            if (btnBuy.onclick = function() {
+                firebase.database().ref().update({
+                    Buy: 2                
                 })
             })
-        })
+    
+            // let btnNope = document.createElement("button")
+            // btnNope.innerHTML = "Do Nothing"
+    
+            document.body.appendChild(btnBuy)
+            // document.body.appendChild(btnNope)
+        }
+    })
 
-        // let btnNope = document.createElement("button")
-        // btnNope.innerHTML = "Do Nothing"
-
-        document.body.appendChild(btnBuy)
-        // document.body.appendChild(btnNope)
-    }
+})
