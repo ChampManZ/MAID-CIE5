@@ -1,12 +1,14 @@
 var testValue = 1 //ค่า LDR detect
+let btnBuy = document.createElement("button")
 var checkPlayer = document.getElementById("forHidden").textContent
 var diceFont = document.getElementById("diceValue")
 var playerRefVar = document.getElementById("firebaseHidden").textContent
 
-let btnBuy = document.createElement("button")
-
-var playerStatusRef = firebase.database().ref("CurrentPlayer")
-playerStatusRef.once("value", function(snapshot) {
+var ldrValRef = firebase.database().ref("AtTheDestination")
+ldrValRef.on("value", function(snapshot){
+    var ldrVal = snapshot.val()
+    var playerStatusRef = firebase.database().ref("CurrentPlayer")
+    playerStatusRef.once("value", function(snapshot) {
     var playerStatus = snapshot.val()
 
     // if (playerStatus != checkPlayer) {
@@ -30,6 +32,7 @@ playerStatusRef.once("value", function(snapshot) {
             }
             else if (playerStatus == 2) {
                 diceFont.innerHTML = "Player Green is playing"
+                console.log("Green's Theorem")
             } else if (playerStatus == 3) {
                 diceFont.innerHTML = "Player Blue is playing"
             } else if (playerStatus == 4) {
@@ -37,7 +40,7 @@ playerStatusRef.once("value", function(snapshot) {
             }
         }
 
-        if (testValue == 1 && Number(checkPlayer) == playerStatus) {
+        if (ldrVal == true && Number(checkPlayer) == playerStatus) {
             //เดียว innerHTML ให้ไป fetch ข้อมูล block มาใส้
             // setTimeout(function(){
             //     var reloadDamnRef = firebase.database().ref()
@@ -58,6 +61,7 @@ playerStatusRef.once("value", function(snapshot) {
                 if (window.location.hash != '#r') {
                     window.location.hash = 'r'
                     window.location.reload(1)
+                    console.log("Fetch data")
                 }
             }, 5000)
 
@@ -80,7 +84,22 @@ playerStatusRef.once("value", function(snapshot) {
                     diceFont.innerHTML = "Player Baby Blue is playing"
                 }
             }
+
             document.getElementById("commandzone").innerHTML += "<h3>You are now landed on " + destinationPlayer + ": "
+
+            if (destinationPlayer < 10) {
+                var landpriceRef = firebase.database().ref("Blocks/0" + destinationPlayer + "/LandPrice")
+                landpriceRef.once("value", function(snapshot){
+                    var landpriceVal = snapshot.val()
+                    document.getElementById("commandzone").innerHTML += "<h3> Landprice of " + destinationPlayer + ": $" + landpriceVal
+                })
+            } else if (destinationPlayer > 10) {
+                var landpriceRef = firebase.database().ref("Blocks/" + destinationPlayer + "/LandPrice")
+                landpriceRef.once("value", function(snapshot){
+                    var landpriceVal = snapshot.val()
+                    document.getElementById("commandzone").innerHTML += "<h3> Landprice of " + destinationPlayer + ": $" + landpriceVal
+                })
+            }
     
             btnBuy.innerHTML = "Buy"
             if (btnBuy.onclick = function() {
@@ -89,6 +108,10 @@ playerStatusRef.once("value", function(snapshot) {
                 })
                 btnBuy.style.visibility = 'hidden'
                 btnSell.style.visibility = 'hidden'
+
+                firebase.database().ref().update({
+                    AtTheDestination: false
+                })
             })
     
             // let btnNope = document.createElement("button")
@@ -98,6 +121,7 @@ playerStatusRef.once("value", function(snapshot) {
             // document.body.appendChild(btnNope)
         }
     })
+})
 })
 
 function reloadPage() {
