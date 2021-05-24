@@ -6,7 +6,8 @@ playerBankruptRef.once("value", function(snapshot){
     var bankruptValue = snapshot.val()
     
     if (bankruptValue == 1) {
-        winloseDiv.innerHTML += "You Lose!"
+        winloseDiv.innerHTML += "You Lose! "
+        document.getElementById("infomation").remove()
     }
 })
 

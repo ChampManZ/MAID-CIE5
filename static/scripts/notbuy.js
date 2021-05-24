@@ -1,5 +1,6 @@
 var playerStatusRef = firebase.database().ref("CurrentPlayer")
-playerStatusRef.once("value", function(snapshot){
+playerStatusRef.once("value", function(snapshot) {
+    
     var playerStatus = snapshot.val()
     var ldrValRef = firebase.database().ref("AtTheDestination")
     ldrValRef.on("value", function(snapshot){
@@ -12,7 +13,9 @@ playerStatusRef.once("value", function(snapshot){
             let btnSell = document.createElement("button")
             btnSell.id = "btnSell"
             btnSell.innerHTML = "Do Nothing"
-            
+            btnSell.className = "btnCommand"
+            document.getElementById("zzz").appendChild(btnSell)
+
             if (btnSell.onclick = function() {
                 firebase.database().ref().update({
                     Buy: 1
@@ -23,7 +26,7 @@ playerStatusRef.once("value", function(snapshot){
                     AtTheDestination: false
                 })
             })
-            document.body.appendChild(btnSell)
+            console.log('hi')
         }
     })
 })

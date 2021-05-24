@@ -1,8 +1,8 @@
 var testValue = 1 //ค่า LDR detect
-let btnBuy = document.createElement("button")
 var checkPlayer = document.getElementById("forHidden").textContent
 var diceFont = document.getElementById("diceValue")
 var playerRefVar = document.getElementById("firebaseHidden").textContent
+var blockValue = document.getElementById("blockValue").textContent
 
 var ldrValRef = firebase.database().ref("AtTheDestination")
 ldrValRef.on("value", function(snapshot){
@@ -26,6 +26,8 @@ ldrValRef.on("value", function(snapshot){
     destinationRef.once("value", function(snapshot){
         var destinationPlayer = snapshot.val()
 
+        console.log(typeof(document.getElementById(destinationPlayer).getAttribute('value')), "Aunne")
+
         if (Number(checkPlayer) != playerStatus) {
             if (playerStatus == 1) {
                 diceFont.innerHTML = "Player Red is playing"
@@ -40,7 +42,56 @@ ldrValRef.on("value", function(snapshot){
             }
         }
 
+        console.log(destinationPlayer)
+
+        var redRef = firebase.database().ref("Players/P1/Destination")
+        redRef.on("value", function(snapshot){
+            var redDestVal = snapshot.val()
+            var greenRef = firebase.database().ref("Players/P2/Destination")
+            greenRef.on("value", function(snapshot){
+                var greenDestVal = snapshot.val()
+                var blueRef = firebase.database().ref("Players/P3/Destination")
+                blueRef.on("value", function(snapshot){
+                    var blueDestVal = snapshot.val()
+                    var babyBlueRef = firebase.database().ref("Players/P4/Destination")
+                    babyBlueRef.on("value", function(snapshot){
+                        var babyBlueDestVal = snapshot.val()
+
+                        if (redDestVal == parseInt(document.getElementById(redDestVal).getAttribute('value'))) {
+                            // var mySpan = document.createElement("span")
+                            // mySpan.className = "mySpan"
+                            // document.getElementById(destinationPlayer).innerHTML += mySpan
+                            // console.log("This is a span")
+                            
+                            document.getElementById("mySpan" + redDestVal).style.display = "block"
+                            console.log("Red is ", redDestVal)
+                            console.log(greenDestVal)
+                        }
+                
+                        if (greenDestVal == parseInt(document.getElementById(greenDestVal).getAttribute('value'))) {
+                            document.getElementById("greenmySpan" + greenDestVal).style.display = "block"
+                            console.log("Green is ", greenDestVal)
+                        }
+
+                        if (blueDestVal == parseInt(document.getElementById(blueDestVal).getAttribute('value'))) {
+                            document.getElementById("bluemySpan" + blueDestVal).style.display = "block"
+                        }
+
+                        if (babyBlueDestVal == parseInt(document.getElementById(babyBlueDestVal).getAttribute("value"))) {
+                            document.getElementById("babybluemySpan" + babyBlueDestVal).style.display = "block"
+                        }
+
+                    })
+                })
+            })
+        })
+
         if (ldrVal == true && Number(checkPlayer) == playerStatus) {
+            var buttonDiv = document.getElementById("zzz")
+            let btnBuy = document.createElement("button")
+            btnBuy.innerHTML = "Buy"
+            btnBuy.className = "btnCommand"
+            buttonDiv.appendChild(btnBuy)
             //เดียว innerHTML ให้ไป fetch ข้อมูล block มาใส้
             // setTimeout(function(){
             //     var reloadDamnRef = firebase.database().ref()
@@ -48,7 +99,7 @@ ldrValRef.on("value", function(snapshot){
             //         var reloadVal = snapshot.val()
 
             //         if (reloadVal == 1) {
-            //             firebase.database().ref().update({
+            //             firebase.database().ref).update({
             //                 reloadVal: 0
             //             })
             //             location.reload()
@@ -87,21 +138,22 @@ ldrValRef.on("value", function(snapshot){
 
             document.getElementById("commandzone").innerHTML += "<h3>You are now landed on " + destinationPlayer + ": "
 
-            if (destinationPlayer < 10) {
-                var landpriceRef = firebase.database().ref("Blocks/0" + destinationPlayer + "/LandPrice")
-                landpriceRef.once("value", function(snapshot){
-                    var landpriceVal = snapshot.val()
-                    document.getElementById("commandzone").innerHTML += "<h3> Landprice of " + destinationPlayer + ": $" + landpriceVal
-                })
-            } else if (destinationPlayer > 10) {
                 var landpriceRef = firebase.database().ref("Blocks/" + destinationPlayer + "/LandPrice")
                 landpriceRef.once("value", function(snapshot){
                     var landpriceVal = snapshot.val()
-                    document.getElementById("commandzone").innerHTML += "<h3> Landprice of " + destinationPlayer + ": $" + landpriceVal
+                    var tollRef = firebase.database().ref("Blocks/" + destinationPlayer + "/Toll")
+                    tollRef.once("value", function(snapshot){
+                        if (destinationPlayer == 0) {
+                            document.getElementById("commandzone").innerHTML += "<h3> Calm down, game is nearly start!"
+                        } else {
+                        var tollVal = snapshot.val()
+                        document.getElementById("commandzone").innerHTML += "<h3> Landprice" + ": $" + landpriceVal
+                        document.getElementById("commandzone").innerHTML += "<h3> Toll Value: $" + tollVal
+                        }
+                    })
                 })
-            }
     
-            btnBuy.innerHTML = "Buy"
+
             if (btnBuy.onclick = function() {
                 firebase.database().ref().update({
                     Buy: 2                
@@ -117,7 +169,7 @@ ldrValRef.on("value", function(snapshot){
             // let btnNope = document.createElement("button")
             // btnNope.innerHTML = "Do Nothing"
     
-            document.body.appendChild(btnBuy)
+            console.log('hello')
             // document.body.appendChild(btnNope)
         }
     })
